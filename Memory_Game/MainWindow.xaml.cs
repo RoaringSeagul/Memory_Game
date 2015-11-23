@@ -20,9 +20,22 @@ namespace Memory_Game
     /// </summary>
     public partial class MainWindow : Window
     {
+
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            Window login = new Login();
+            login.ShowDialog();
+            this.Show();
         }
     }
 }

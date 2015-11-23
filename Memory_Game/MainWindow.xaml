@@ -5,23 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="MainWindow" Height="467.003" Width="525">
+        Title="MainWindow" Height="467.003" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid Background="#FFBFBFBF">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="239*"/>
-            <ColumnDefinition Width="278*"/>
-        </Grid.ColumnDefinitions>
-        <TextBox x:Name="txt" HorizontalAlignment="Left" Height="20" Margin="62,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Background="White" Grid.Column="1"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="20" Margin="166,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
-        <Label x:Name="lblScore1" Content="Score Joueur 1" HorizontalAlignment="Left" Height="26" Margin="62,10,0,0" VerticalAlignment="Top" Width="99" Grid.Column="1"/>
-        <Label x:Name="lblScore2" Content="Score Joueur 2" HorizontalAlignment="Left" Height="26" Margin="166,10,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.021,0.54" Grid.Column="1"/>
+        <TextBox x:Name="txt" HorizontalAlignment="Left" Height="20" Margin="304,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Background="White"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="20" Margin="408,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="lblScore1" Content="Score Joueur 1" HorizontalAlignment="Left" Height="26" Margin="304,10,0,0" VerticalAlignment="Top" Width="99"/>
+        <Label x:Name="lblScore2" Content="Score Joueur 2" HorizontalAlignment="Left" Height="26" Margin="408,10,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.021,0.54"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="35">
-            <MenuItem Header="_File" Width="35">
-                <MenuItem HorizontalAlignment="Left" Header="_test" />
+            <MenuItem Header="_File" Width="35" RenderTransformOrigin="0.5,0.5" Margin="0">
+                <MenuItem Header="_test" />
                 <Separator />
-                <MenuItem HorizontalAlignment="Left" Header="_test" />
+                <MenuItem Header="_test" />
             </MenuItem>
-            
+
         </Menu>
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="350" Margin="10,77,0,0" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2"/>
     </Grid>

@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="Login" Height="212.097" Width="300">
+        Title="Login" Height="197.535" Width="262.013">
     <Grid x:Name="frmLogin" Background="#FFBFBFBF">
-        <Button x:Name="btnLogin" Content="Connexion" HorizontalAlignment="Left" Margin="106,145,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btnCancel" Content="Annuler" HorizontalAlignment="Left" Margin="186,145,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="txtUser" HorizontalAlignment="Left" Height="19" Margin="42,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="White"/>
-        <Label x:Name="lblUser" Content="Utilisateur" HorizontalAlignment="Left" Height="11" Margin="42,7,0,0" VerticalAlignment="Top" Width="81"/>
-        <Label x:Name="lblUser1" Content="Utilisateur" HorizontalAlignment="Left" Margin="42,15,0,0" VerticalAlignment="Top" Width="107" Height="25"/>
-        <Label x:Name="lblPassword" Content="Mot de passe" HorizontalAlignment="Left" Margin="42,76,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,-0.491"/>
-        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="19" Margin="42,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219"/>
+        <Button x:Name="btnLogin" Content="Connexion" HorizontalAlignment="Left" Margin="74,122,0,0" VerticalAlignment="Top" Width="75" Click="btnLogin_Click"/>
+        <Button x:Name="btnCancel" Content="Annuler" HorizontalAlignment="Left" Margin="154,122,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+        <TextBlock x:Name="txtUser" HorizontalAlignment="Left" Height="19" Margin="10,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219" Background="White"/>
+        <Label x:Name="lblUser" Content="Utilisateur" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" Width="107" Height="25"/>
+        <Label x:Name="lblPassword" Content="Mot de passe" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.53,-0.491"/>
+        <TextBox x:Name="txtPassword" HorizontalAlignment="Left" Height="19" Margin="10,84,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="219"/>
 
     </Grid>
 </Window>
