@@ -4,15 +4,23 @@
 winexe
 C#
 .cs
+<<<<<<< HEAD
 C:\420-GED\Memory_Game\Memory_Game\obj\Debug\
+=======
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\
+>>>>>>> 6686d6170cc20fb5479d7c59252e6bec2897bd22
 Memory_Game
 none
 false
 DEBUG;TRACE
+<<<<<<< HEAD
 C:\420-GED\Memory_Game\Memory_Game\App.xaml
+=======
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\App.xaml
+>>>>>>> 6686d6170cc20fb5479d7c59252e6bec2897bd22
 31979121555
 
-111811940107
+11-850722698
 13738642453
 Login.xaml;MainWindow.xaml;NewGame.xaml;
 

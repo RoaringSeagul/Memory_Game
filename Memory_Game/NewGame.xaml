@@ -5,8 +5,31 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="NewGame" Height="300" Width="300">
-    <Grid Background="#FFBFBFBF">
-        
+        Title="NewGame" Height="222.353" Width="300">
+    <Grid Background="#FFBFBFBF" Height="230" VerticalAlignment="Top">
+        <Label x:Name="lblGrille" Content="Grille:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblNbrJoueur" Content="Nombre de joueurs:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTheme" Content="Thème:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDebutePartie" Content="Débute la partie:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbxGrile" HorizontalAlignment="Left" Margin="135,14,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="8x8" IsSelected="True"/>
+            <ComboBoxItem Content="9x9"/>
+            <ComboBoxItem Content="10x0"/>
+        </ComboBox>
+        <ComboBox x:Name="cbxNbrJoueurs" HorizontalAlignment="Left" Margin="135,45,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="1"/>
+            <ComboBoxItem Content="2" IsSelected="True"/>
+        </ComboBox>
+        <ComboBox x:Name="cbxTheme" HorizontalAlignment="Left" Margin="135,76,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Fruits" IsSelected="True"/>
+            <ComboBoxItem Content="Voitures"/>
+        </ComboBox>
+        <ComboBox x:Name="cboxDebutePartie" HorizontalAlignment="Left" Margin="135,107,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Joueur 1" IsSelected="True"/>
+            <ComboBoxItem Content="Joueur 2"/>
+            <ComboBoxItem Content="Ordinateur" IsEnabled="False"/>
+        </ComboBox>
+        <Button x:Name="btnStart" Content="Démarrer Partie" HorizontalAlignment="Left" Margin="158,147,0,0" VerticalAlignment="Top" Width="97"/>
+
     </Grid>
 </Window>
