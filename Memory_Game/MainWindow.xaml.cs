@@ -23,6 +23,8 @@ namespace Memory_Game
         public MainWindow()
         {
             InitializeComponent();
+
+
         }
     }
 }

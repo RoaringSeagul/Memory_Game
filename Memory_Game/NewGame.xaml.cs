@@ -19,6 +19,8 @@ namespace Memory_Game
     /// </summary>
     public partial class NewGame : Window
     {
+
+
         public NewGame()
         {
             InitializeComponent();
