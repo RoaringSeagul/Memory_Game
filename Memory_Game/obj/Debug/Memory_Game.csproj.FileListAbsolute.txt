@@ -26,3 +26,12 @@ C:\420-GED\Memory_Game\Memory_Game\obj\Debug\Carte.baml
 C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\bin\Debug\Memory_Game.exe.config
 C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game.exe
 C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game.pdb
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game.csprojResolveAssemblyReference.cache
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Carte.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Login.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\MainWindow.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\NewGame.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\App.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game_Content.g.cs
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game_MarkupCompile.cache
+C:\Users\Utilisateur\Documents\Développement avec les bases de données\TP2\Memory_Game\Memory_Game\obj\Debug\Memory_Game_MarkupCompile.lref
