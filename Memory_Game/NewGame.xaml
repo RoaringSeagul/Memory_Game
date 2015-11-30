@@ -5,31 +5,38 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="NewGame" Height="222.353" Width="300">
-    <Grid Background="#FFBFBFBF" Height="230" VerticalAlignment="Top">
-        <Label x:Name="lblGrille" Content="Grille:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblNbrJoueur" Content="Nombre de joueurs:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblTheme" Content="Thème:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDebutePartie" Content="Débute la partie:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top"/>
-        <ComboBox x:Name="cbxGrile" HorizontalAlignment="Left" Margin="135,14,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="8x8" IsSelected="True"/>
-            <ComboBoxItem Content="9x9"/>
-            <ComboBoxItem Content="10x0"/>
+        Title="NewGame" Height="270.156" Width="290.565">
+    <Grid Background="#FFBFBFBF" Height="244" VerticalAlignment="Top" Margin="0,0,-8,-4">
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="0*"/>
+        </Grid.RowDefinitions>
+        <Label x:Name="lblGrille" Content="Grille:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="26" Width="40"/>
+        <Label x:Name="lblNbrJoueur" Content="Nombre de joueurs:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top" Height="26" Width="115"/>
+        <Label x:Name="lblTheme" Content="Thème:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top" Height="26" Width="49"/>
+        <Label x:Name="lblDebutePartie" Content="Débute la partie:" HorizontalAlignment="Left" Margin="10,103,0,0" VerticalAlignment="Top" Height="26" Width="98"/>
+        <ComboBox x:Name="cbxGrile" HorizontalAlignment="Left" Margin="135,14,0,0" VerticalAlignment="Top" Width="120" Height="22">
+            <ComboBoxItem x:Name="cbxGrilleItem8x8" Content="8x8" IsSelected="True"/>
+            <ComboBoxItem x:Name="cbxGrilleItem9x9" Content="9x9"/>
         </ComboBox>
-        <ComboBox x:Name="cbxNbrJoueurs" HorizontalAlignment="Left" Margin="135,45,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="1"/>
-            <ComboBoxItem Content="2" IsSelected="True"/>
+        <ComboBox x:Name="cbxNbrJoueurs" HorizontalAlignment="Left" Margin="135,45,0,0" VerticalAlignment="Top" Width="120" Height="22" SelectionChanged="cbxNbrJoueurs_SelectionChanged">
+            <ComboBoxItem x:Name="cbxNbrJoueurItem1" Content="1"/>
+            <ComboBoxItem x:Name="cbxNbrJoueurItem2" Content="2" IsSelected="True"/>
         </ComboBox>
-        <ComboBox x:Name="cbxTheme" HorizontalAlignment="Left" Margin="135,76,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Fruits" IsSelected="True"/>
-            <ComboBoxItem Content="Voitures"/>
+        <ComboBox x:Name="cbxTheme" HorizontalAlignment="Left" Margin="135,76,0,0" VerticalAlignment="Top" Width="120" Height="22">
+            <ComboBoxItem x:Name="cbxThemeItemFruits" Content="Fruits" IsSelected="True"/>
+            <ComboBoxItem x:Name="cbxThemeItemVoitures" Content="Voitures"/>
         </ComboBox>
-        <ComboBox x:Name="cboxDebutePartie" HorizontalAlignment="Left" Margin="135,107,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Joueur 1" IsSelected="True"/>
-            <ComboBoxItem Content="Joueur 2"/>
-            <ComboBoxItem Content="Ordinateur" IsEnabled="False"/>
+        <ComboBox x:Name="cbxDebutePartie" HorizontalAlignment="Left" Margin="135,107,0,0" VerticalAlignment="Top" Width="120" Height="22">
+            <ComboBoxItem x:Name="cbxDebutePartieItemJoueur1" Content="Joueur 1" IsSelected="True"/>
+            <ComboBoxItem x:Name="cbxDebutePartieItemJoueur2" Content="Joueur 2"/>
+            <ComboBoxItem x:Name="cbxDebutePartieItemOrdinateur" Content="Ordinateur" IsEnabled="False"/>
         </ComboBox>
-        <Button x:Name="btnStart" Content="Démarrer Partie" HorizontalAlignment="Left" Margin="158,147,0,0" VerticalAlignment="Top" Width="97"/>
+        <Button x:Name="btnStart" Content="Démarrer Partie" HorizontalAlignment="Left" Margin="158,205,0,0" VerticalAlignment="Top" Width="97" Height="22"/>
+        <Label x:Name="lblNomJoueur1" Content="Nom joueur 1: " HorizontalAlignment="Left" Margin="10,134,0,0" VerticalAlignment="Top" Height="26" Width="89"/>
+        <Label x:Name="lblNomJoueur2" Content="Nom joueur 2: " HorizontalAlignment="Left" Margin="10,160,0,0" VerticalAlignment="Top" Height="26" Width="89"/>
+        <TextBox x:Name="txtbNomJoueur1" HorizontalAlignment="Left" Height="23" Margin="135,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="txtbNomJoueur2" HorizontalAlignment="Left" Height="23" Margin="135,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
 </Window>
