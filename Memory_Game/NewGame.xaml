@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
         Title="NewGame" Height="222.353" Width="300">
-    <Grid Background="#FFBFBFBF" Height="230" VerticalAlignment="Top">
+    <Grid Background="#FFBFBFBF" Height="191" VerticalAlignment="Top">
         <Label x:Name="lblGrille" Content="Grille:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblNbrJoueur" Content="Nombre de joueurs:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblTheme" Content="Thème:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>

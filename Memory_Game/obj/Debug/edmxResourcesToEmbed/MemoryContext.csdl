@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MemoryContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="MemoryContextContainer1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Etats" EntityType="MemoryContext.Etat" />
+    <EntitySet Name="Jouers" EntityType="MemoryContext.Jouer" />
+    <EntitySet Name="Parties" EntityType="MemoryContext.Partie" />
+    <EntitySet Name="Utilisateurs" EntityType="MemoryContext.Utilisateur" />
+    <AssociationSet Name="CE_monEtat" Association="MemoryContext.CE_monEtat">
+      <End Role="Etat" EntitySet="Etats" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_maPartie" Association="MemoryContext.CE_maPartie">
+      <End Role="Partie" EntitySet="Parties" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_monUser" Association="MemoryContext.CE_monUser">
+      <End Role="Utilisateur" EntitySet="Utilisateurs" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Etat">
+    <Key>
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idEtat" Type="Int32" Nullable="false" />
+    <Property Name="nomEtat" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_monEtat" FromRole="Etat" ToRole="Jouer" />
+  </EntityType>
+  <EntityType Name="Jouer">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" />
+    <Property Name="idEtat" Type="Int32" Nullable="false" />
+    <Property Name="idPartie" Type="Int32" Nullable="false" />
+    <Property Name="listeCombine" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Etat" Relationship="MemoryContext.CE_monEtat" FromRole="Jouer" ToRole="Etat" />
+    <NavigationProperty Name="Partie" Relationship="MemoryContext.CE_maPartie" FromRole="Jouer" ToRole="Partie" />
+    <NavigationProperty Name="Utilisateur" Relationship="MemoryContext.CE_monUser" FromRole="Jouer" ToRole="Utilisateur" />
+  </EntityType>
+  <EntityType Name="Partie">
+    <Key>
+      <PropertyRef Name="idPartie" />
+    </Key>
+    <Property Name="idPartie" Type="Int32" Nullable="false" />
+    <Property Name="dateHeurePartie" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_maPartie" FromRole="Partie" ToRole="Jouer" />
+  </EntityType>
+  <EntityType Name="Utilisateur">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="Int32" Nullable="false" />
+    <Property Name="nomUser" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="prenomUser" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_monUser" FromRole="Utilisateur" ToRole="Jouer" />
+  </EntityType>
+  <Association Name="CE_monEtat">
+    <End Type="MemoryContext.Etat" Role="Etat" Multiplicity="1" />
+    <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etat">
+        <PropertyRef Name="idEtat" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idEtat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_maPartie">
+    <End Type="MemoryContext.Partie" Role="Partie" Multiplicity="1" />
+    <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partie">
+        <PropertyRef Name="idPartie" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idPartie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_monUser">
+    <End Type="MemoryContext.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+    <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

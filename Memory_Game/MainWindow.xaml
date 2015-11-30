@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Memory_Game"
         mc:Ignorable="d"
-        Title="MainWindow" Height="467.003" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
+        Title="MainWindow" Height="600" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid Background="#FFBFBFBF">
         <TextBox x:Name="txt" HorizontalAlignment="Left" Height="20" Margin="304,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Background="White"/>
         <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="20" Margin="408,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
@@ -17,8 +17,9 @@
                 <Separator />
                 <MenuItem Header="_test" />
             </MenuItem>
-
         </Menu>
-        <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="350" Margin="10,77,0,0" VerticalAlignment="Top" Width="497" Grid.ColumnSpan="2"/>
+        <UniformGrid x:Name="Plateau" Rows="8" Columns="8" Height="500px" Width="500px" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+            
+        </UniformGrid>
     </Grid>
 </Window>

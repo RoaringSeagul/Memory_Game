@@ -2,12 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Memory_Game"
-<<<<<<< HEAD
-             StartupUri="Login.xaml">
-=======
-             StartupUri="NewGame.xaml">
->>>>>>> 6686d6170cc20fb5479d7c59252e6bec2897bd22
+             StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

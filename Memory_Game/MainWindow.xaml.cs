@@ -24,8 +24,16 @@ namespace Memory_Game
         public MainWindow()
         {
             InitializeComponent();
-
-
+            Plateau.Rows = 8;
+            Plateau.Columns = 8;
+            logique logique = new logique(8);
+            for (int x = 0; x < 8; x++)
+            {
+                for (int y = 0; y < 8; y++)
+                {
+                    Plateau.Children.Add(new Carte(x, y, 8, logique.GetImage(x, y)));
+                }
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -35,9 +43,9 @@ namespace Memory_Game
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Window login = new Login();
-            login.ShowDialog();
-            this.Show();
+            //Window login = new Login();
+            //login.ShowDialog();
+            //this.Show();
         }
     }
 }
