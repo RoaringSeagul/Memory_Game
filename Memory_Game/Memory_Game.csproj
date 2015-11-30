@@ -71,6 +71,7 @@
     <Compile Include="Carte.xaml.cs">
       <DependentUpon>Carte.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CoordUsed.cs" />
     <Compile Include="Etat.cs">
       <DependentUpon>MemoryContext.tt</DependentUpon>
     </Compile>

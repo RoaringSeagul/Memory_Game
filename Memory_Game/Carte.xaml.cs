@@ -35,7 +35,7 @@ namespace Memory_Game
             btn.Click += (sender, e) =>
             {
                 var brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri((Directory.GetCurrentDirectory() + img.imageName + ".png"), UriKind.Relative));
+                brush.ImageSource = new BitmapImage(new Uri((Directory.GetCurrentDirectory() + @"\Image\" + img.imageName + ".png"), UriKind.Relative));
                 btn.Background = brush;
             };
         }
