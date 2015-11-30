@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3f20712784a14126a2bc2b951d3735a3" Name="Diagram1" >
+        <EntityTypeShape EntityType="MemoryContext.Etat" Width="1.5" PointX="9.125" PointY="0.875" />
+        <EntityTypeShape EntityType="MemoryContext.Jouer" Width="1.5" PointX="6.125" PointY="0.625" />
+        <EntityTypeShape EntityType="MemoryContext.Partie" Width="1.5" PointX="3.875" PointY="1" />
+        <EntityTypeShape EntityType="MemoryContext.Utilisateur" Width="1.5" PointX="6.25" PointY="3.75" />
+        <AssociationConnector Association="MemoryContext.CE_monEtat" />
+        <AssociationConnector Association="MemoryContext.CE_maPartie" />
+        <AssociationConnector Association="MemoryContext.CE_monUser" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

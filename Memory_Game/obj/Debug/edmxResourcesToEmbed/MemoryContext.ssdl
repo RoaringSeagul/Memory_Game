@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="MemoryContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MemoryContextStoreContainer">
+    <EntitySet Name="Etats" EntityType="MemoryContext.Store.Etats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Jouers" EntityType="MemoryContext.Store.Jouers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parties" EntityType="MemoryContext.Store.Parties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Utilisateurs" EntityType="MemoryContext.Store.Utilisateurs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CE_monEtat" Association="MemoryContext.Store.CE_monEtat">
+      <End Role="Etat" EntitySet="Etats" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_maPartie" Association="MemoryContext.Store.CE_maPartie">
+      <End Role="Partie" EntitySet="Parties" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_monUser" Association="MemoryContext.Store.CE_monUser">
+      <End Role="Utilisateur" EntitySet="Utilisateurs" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Etats">
+    <Key>
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idEtat" Type="int" Nullable="false" />
+    <Property Name="nomEtat" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Jouers">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idEtat" Type="int" Nullable="false" />
+    <Property Name="idPartie" Type="int" Nullable="false" />
+    <Property Name="listeCombine" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Parties">
+    <Key>
+      <PropertyRef Name="idPartie" />
+    </Key>
+    <Property Name="idPartie" Type="int" Nullable="false" />
+    <Property Name="dateHeurePartie" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Utilisateurs">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="nomUser" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="prenomUser" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <Association Name="CE_monEtat">
+    <End Role="Etat" Type="MemoryContext.Store.Etats" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etat">
+        <PropertyRef Name="idEtat" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idEtat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_maPartie">
+    <End Role="Partie" Type="MemoryContext.Store.Parties" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partie">
+        <PropertyRef Name="idPartie" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idPartie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_monUser">
+    <End Role="Utilisateur" Type="MemoryContext.Store.Utilisateurs" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

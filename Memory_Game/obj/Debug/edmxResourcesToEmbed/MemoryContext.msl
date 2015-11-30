@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MemoryContextStoreContainer" CdmEntityContainer="MemoryContextContainer1">
+    <EntitySetMapping Name="Etats">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Etat)">
+        <MappingFragment StoreEntitySet="Etats">
+          <ScalarProperty Name="idEtat" ColumnName="idEtat" />
+          <ScalarProperty Name="nomEtat" ColumnName="nomEtat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jouers">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Jouer)">
+        <MappingFragment StoreEntitySet="Jouers">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idEtat" ColumnName="idEtat" />
+          <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+          <ScalarProperty Name="listeCombine" ColumnName="listeCombine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parties">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Partie)">
+        <MappingFragment StoreEntitySet="Parties">
+          <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+          <ScalarProperty Name="dateHeurePartie" ColumnName="dateHeurePartie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilisateurs">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Utilisateur)">
+        <MappingFragment StoreEntitySet="Utilisateurs">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="nomUser" ColumnName="nomUser" />
+          <ScalarProperty Name="prenomUser" ColumnName="prenomUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

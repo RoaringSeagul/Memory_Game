@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:Memory_Game"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+
     </Application.Resources>
 </Application>

@@ -1,0 +1,254 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MemoryContext.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="MemoryContextStoreContainer">
+    <EntitySet Name="Etats" EntityType="MemoryContext.Store.Etats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Jouers" EntityType="MemoryContext.Store.Jouers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Parties" EntityType="MemoryContext.Store.Parties" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Utilisateurs" EntityType="MemoryContext.Store.Utilisateurs" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="CE_monEtat" Association="MemoryContext.Store.CE_monEtat">
+      <End Role="Etat" EntitySet="Etats" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_maPartie" Association="MemoryContext.Store.CE_maPartie">
+      <End Role="Partie" EntitySet="Parties" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+    <AssociationSet Name="CE_monUser" Association="MemoryContext.Store.CE_monUser">
+      <End Role="Utilisateur" EntitySet="Utilisateurs" />
+      <End Role="Jouer" EntitySet="Jouers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Etats">
+    <Key>
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idEtat" Type="int" Nullable="false" />
+    <Property Name="nomEtat" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Jouers">
+    <Key>
+      <PropertyRef Name="idUser" />
+      <PropertyRef Name="idEtat" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="idEtat" Type="int" Nullable="false" />
+    <Property Name="idPartie" Type="int" Nullable="false" />
+    <Property Name="listeCombine" Type="varchar" Nullable="false" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="Parties">
+    <Key>
+      <PropertyRef Name="idPartie" />
+    </Key>
+    <Property Name="idPartie" Type="int" Nullable="false" />
+    <Property Name="dateHeurePartie" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <EntityType Name="Utilisateurs">
+    <Key>
+      <PropertyRef Name="idUser" />
+    </Key>
+    <Property Name="idUser" Type="int" Nullable="false" />
+    <Property Name="nomUser" Type="varchar" Nullable="false" MaxLength="30" />
+    <Property Name="prenomUser" Type="varchar" Nullable="false" MaxLength="30" />
+  </EntityType>
+  <Association Name="CE_monEtat">
+    <End Role="Etat" Type="MemoryContext.Store.Etats" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Etat">
+        <PropertyRef Name="idEtat" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idEtat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_maPartie">
+    <End Role="Partie" Type="MemoryContext.Store.Parties" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Partie">
+        <PropertyRef Name="idPartie" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idPartie" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="CE_monUser">
+    <End Role="Utilisateur" Type="MemoryContext.Store.Utilisateurs" Multiplicity="1" />
+    <End Role="Jouer" Type="MemoryContext.Store.Jouers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Utilisateur">
+        <PropertyRef Name="idUser" />
+      </Principal>
+      <Dependent Role="Jouer">
+        <PropertyRef Name="idUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="MemoryContext" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="MemoryContextContainer1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Etats" EntityType="MemoryContext.Etat" />
+          <EntitySet Name="Jouers" EntityType="MemoryContext.Jouer" />
+          <EntitySet Name="Parties" EntityType="MemoryContext.Partie" />
+          <EntitySet Name="Utilisateurs" EntityType="MemoryContext.Utilisateur" />
+          <AssociationSet Name="CE_monEtat" Association="MemoryContext.CE_monEtat">
+            <End Role="Etat" EntitySet="Etats" />
+            <End Role="Jouer" EntitySet="Jouers" />
+          </AssociationSet>
+          <AssociationSet Name="CE_maPartie" Association="MemoryContext.CE_maPartie">
+            <End Role="Partie" EntitySet="Parties" />
+            <End Role="Jouer" EntitySet="Jouers" />
+          </AssociationSet>
+          <AssociationSet Name="CE_monUser" Association="MemoryContext.CE_monUser">
+            <End Role="Utilisateur" EntitySet="Utilisateurs" />
+            <End Role="Jouer" EntitySet="Jouers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Etat">
+          <Key>
+            <PropertyRef Name="idEtat" />
+          </Key>
+          <Property Name="idEtat" Type="Int32" Nullable="false" />
+          <Property Name="nomEtat" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_monEtat" FromRole="Etat" ToRole="Jouer" />
+        </EntityType>
+        <EntityType Name="Jouer">
+          <Key>
+            <PropertyRef Name="idUser" />
+            <PropertyRef Name="idEtat" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="idEtat" Type="Int32" Nullable="false" />
+          <Property Name="idPartie" Type="Int32" Nullable="false" />
+          <Property Name="listeCombine" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Etat" Relationship="MemoryContext.CE_monEtat" FromRole="Jouer" ToRole="Etat" />
+          <NavigationProperty Name="Partie" Relationship="MemoryContext.CE_maPartie" FromRole="Jouer" ToRole="Partie" />
+          <NavigationProperty Name="Utilisateur" Relationship="MemoryContext.CE_monUser" FromRole="Jouer" ToRole="Utilisateur" />
+        </EntityType>
+        <EntityType Name="Partie">
+          <Key>
+            <PropertyRef Name="idPartie" />
+          </Key>
+          <Property Name="idPartie" Type="Int32" Nullable="false" />
+          <Property Name="dateHeurePartie" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_maPartie" FromRole="Partie" ToRole="Jouer" />
+        </EntityType>
+        <EntityType Name="Utilisateur">
+          <Key>
+            <PropertyRef Name="idUser" />
+          </Key>
+          <Property Name="idUser" Type="Int32" Nullable="false" />
+          <Property Name="nomUser" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="prenomUser" Type="String" Nullable="false" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Jouers" Relationship="MemoryContext.CE_monUser" FromRole="Utilisateur" ToRole="Jouer" />
+        </EntityType>
+        <Association Name="CE_monEtat">
+          <End Type="MemoryContext.Etat" Role="Etat" Multiplicity="1" />
+          <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Etat">
+              <PropertyRef Name="idEtat" />
+            </Principal>
+            <Dependent Role="Jouer">
+              <PropertyRef Name="idEtat" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CE_maPartie">
+          <End Type="MemoryContext.Partie" Role="Partie" Multiplicity="1" />
+          <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Partie">
+              <PropertyRef Name="idPartie" />
+            </Principal>
+            <Dependent Role="Jouer">
+              <PropertyRef Name="idPartie" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CE_monUser">
+          <End Type="MemoryContext.Utilisateur" Role="Utilisateur" Multiplicity="1" />
+          <End Type="MemoryContext.Jouer" Role="Jouer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Utilisateur">
+              <PropertyRef Name="idUser" />
+            </Principal>
+            <Dependent Role="Jouer">
+              <PropertyRef Name="idUser" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MemoryContextStoreContainer" CdmEntityContainer="MemoryContextContainer1">
+    <EntitySetMapping Name="Etats">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Etat)">
+        <MappingFragment StoreEntitySet="Etats">
+          <ScalarProperty Name="idEtat" ColumnName="idEtat" />
+          <ScalarProperty Name="nomEtat" ColumnName="nomEtat" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Jouers">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Jouer)">
+        <MappingFragment StoreEntitySet="Jouers">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="idEtat" ColumnName="idEtat" />
+          <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+          <ScalarProperty Name="listeCombine" ColumnName="listeCombine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Parties">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Partie)">
+        <MappingFragment StoreEntitySet="Parties">
+          <ScalarProperty Name="idPartie" ColumnName="idPartie" />
+          <ScalarProperty Name="dateHeurePartie" ColumnName="dateHeurePartie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Utilisateurs">
+      <EntityTypeMapping TypeName="IsTypeOf(MemoryContext.Utilisateur)">
+        <MappingFragment StoreEntitySet="Utilisateurs">
+          <ScalarProperty Name="idUser" ColumnName="idUser" />
+          <ScalarProperty Name="nomUser" ColumnName="nomUser" />
+          <ScalarProperty Name="prenomUser" ColumnName="prenomUser" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
