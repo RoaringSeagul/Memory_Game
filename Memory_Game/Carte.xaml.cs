@@ -21,11 +21,15 @@ namespace Memory_Game
     /// </summary>
     public partial class Carte : UserControl
     {
-        private int x;
-        private int y;
-        public Carte(int PosX, int PosY, int JeuxGrandeur, ImageCarte img)
+        internal bool clicked = false;
+        int positionX;
+        int positionY;
+        public Carte(int PosX, int PosY, int JeuxGrandeur, MainWindow main)
         {
             InitializeComponent();
+
+            positionX = PosX;
+            positionY = PosY;
 
             btn.Height = 500 / JeuxGrandeur;
             btn.Width = 500 / JeuxGrandeur;
@@ -34,10 +38,13 @@ namespace Memory_Game
 
             btn.Click += (sender, e) =>
             {
-                var brush = new ImageBrush();
-                brush.ImageSource = new BitmapImage(new Uri((Directory.GetCurrentDirectory() + @"\Image\" + img.imageName + ".png"), UriKind.Relative));
-                btn.Background = brush;
+                main.update(positionX, positionY);
             };
+        }
+
+        internal void SetBackground(Brush brush)
+        {
+            btn.Background = brush;
         }
     }
 }
