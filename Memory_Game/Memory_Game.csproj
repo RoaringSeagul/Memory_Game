@@ -76,6 +76,7 @@
       <DependentUpon>MemoryContext.tt</DependentUpon>
     </Compile>
     <Compile Include="Image.cs" />
+    <Compile Include="ImagePossible.cs" />
     <Compile Include="Jouer.cs">
       <DependentUpon>MemoryContext.tt</DependentUpon>
     </Compile>

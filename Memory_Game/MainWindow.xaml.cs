@@ -27,13 +27,19 @@ namespace Memory_Game
         byte size;
         logique.Theme theme;
         Carte[,] aCartes;
+        private int[] clicked1;
+        private int[] clicked2;
+        private bool bclicked1 = false;
+        private bool bclicked2 = false;
 
         public logique logique;
         public MainWindow()
         {
             InitializeComponent();
+            clicked1 = new int[2];
+            clicked2 = new int[2];
             size = 8;
-            theme = logique.Theme.voitures;
+            theme = logique.Theme.fruits;
             logique = new logique(size, theme);
             aCartes = new Carte[size, size];
             TourdeJeu = 0;
@@ -52,7 +58,18 @@ namespace Memory_Game
         internal void update(int x, int y)
         {
             TourdeJeu++;
+            if (!bclicked1)
+            {
+                clicked1[0] = x;
+                clicked1[1] = y;
+            }
 
+            if (!bclicked2)
+            {
+                clicked2[0] = x;
+                clicked2[1] = y;
+            }
+            
             if (logique.GetCurrentPlayer() == logique.GetLastPlayerPlayed())
             {
                 MessageBox.Show("Ce n'est pas votre tour");
@@ -62,18 +79,22 @@ namespace Memory_Game
             {
                 if (!aCartes[x, y].clicked)
                 {
-                    aCartes[x, y].clicked = true;
-                    var brush = new ImageBrush();
-                    brush.ImageSource = new BitmapImage(new Uri((Directory.GetCurrentDirectory() + @"\Image\" + logique.GetImage(x, y).imageName + ".png"), UriKind.Relative));
-                    aCartes[x, y].SetBackground(brush);
-
-                    Thread.Sleep(3000);
-
-                    TurnAllCards();
-
-                    if (logique.GetImage(x, y).imageName.Contains("parking") || logique.GetImage(x, y).imageName.Contains("melange") )
+                    aCartes[x, y].ShowBackground(this);
+                    if (logique.GetImage(x, y).imageName.Contains("parking") || logique.GetImage(x, y).imageName.Contains("melange"))
                     {
+                        TurnAllCards();
                         logique.ReshuffleCards();
+                    }
+                    else if (logique.GetImage(x, y).imageName.Contains("maudite1") || logique.GetImage(x, y).imageName.Contains("maudite2"))
+                    {
+                        TurnAllCards();
+                        logique.ReshuffleCardsCursed(x, y, logique.GetImage(x, y).imageName);
+                    }
+                    else if (logique.GetImage(x, y).imageName.Contains("joker"))
+                    {
+                        TurnAllCards();
+                        aCartes[x, y].SetBackground(Brushes.Red);
+                        logique.rmJoker(x, y);
                     }
                 }
                 else
@@ -83,10 +104,18 @@ namespace Memory_Game
                 }
             }
 
+            aCartes[clicked1[0], clicked1[1]].ShowBackground(this);
+            aCartes[clicked2[0], clicked2[1]].ShowBackground(this);
+
             if (TourdeJeu >= 2)
             {
                 TourdeJeu = 0;
                 logique.ChangeCurrentPlayer();
+
+                var stopWatch = Stopwatch.StartNew();
+                stopWatch.Start();
+                stopWatch.Stop();
+
                 TurnAllCards();
             }
         }
@@ -97,7 +126,10 @@ namespace Memory_Game
             {
                 for (int y = 0; y < size; y++)
                 {
-                    aCartes[x, y].SetBackground(Brushes.Aqua);
+                    if (!logique.GetIsUsed(x, y))
+                    {
+                        aCartes[x, y].SetBackground(Brushes.Aqua);
+                    }
                 }
             }
         }
@@ -112,6 +144,20 @@ namespace Memory_Game
             //Window login = new Login();
             //login.ShowDialog();
             //this.Show();
+        }
+
+        private void btnShowAll_Click(object sender, RoutedEventArgs e)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    if (!logique.GetIsUsed(x, y))
+                    {
+                        aCartes[x, y].ShowBackground(this);
+                    }
+                }
+            }
         }
     }
 }

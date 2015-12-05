@@ -6,9 +6,5 @@
              xmlns:local="clr-namespace:Memory_Game"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Button x:Name="btn">
-        <Button.Background>
-            <ImageBrush/>
-        </Button.Background>
-    </Button>
+    <Button x:Name="btn"/>
 </UserControl>

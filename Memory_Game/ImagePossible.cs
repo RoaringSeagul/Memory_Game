@@ -6,16 +6,9 @@ using System.Threading.Tasks;
 
 namespace Memory_Game
 {
-    public class CoordUsed
+    class ImagePossible
     {
+        public string imageName { get; set; }
         public bool IsUsed { get; set; }
-        public bool IsRemoved { get; set; }
-
-        public CoordUsed()
-        {
-            IsUsed = false;
-        }
-
-
     }
 }

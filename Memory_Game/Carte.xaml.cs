@@ -46,5 +46,22 @@ namespace Memory_Game
         {
             btn.Background = brush;
         }
+
+        internal void ShowBackground(MainWindow main)
+        {
+            clicked = true;
+            var brush = new ImageBrush();
+            brush.ImageSource = new BitmapImage(new Uri(main.logique.GetImage(positionX, positionY).imageName, UriKind.Relative));
+            btn.Background = brush;
+        }
+
+        internal void Disable()
+        {
+            btn.IsEnabled = false;
+        }
+        internal void Enable()
+        {
+            btn.IsEnabled = true;
+        }
     }
 }
