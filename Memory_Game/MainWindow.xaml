@@ -7,8 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="600" Width="525" Closing="Window_Closing" Loaded="Window_Loaded">
     <Grid Background="#FFBFBFBF">
-        <TextBox x:Name="txt" HorizontalAlignment="Left" Height="20" Margin="304,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Background="White"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="20" Margin="408,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
+        <TextBox x:Name="txtPlayer1" HorizontalAlignment="Left" Height="20" Margin="304,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Background="White"/>
+        <TextBox x:Name="txtPlayer2" HorizontalAlignment="Left" Height="20" Margin="408,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
         <Label x:Name="lblScore1" Content="Score Joueur 1" HorizontalAlignment="Left" Height="26" Margin="304,10,0,0" VerticalAlignment="Top" Width="99"/>
         <Label x:Name="lblScore2" Content="Score Joueur 2" HorizontalAlignment="Left" Height="26" Margin="408,10,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.021,0.54"/>
         <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="35">
@@ -20,5 +20,8 @@
         </Menu>
         <UniformGrid x:Name="Plateau" Rows="8" Columns="8" Height="500px" Width="500px" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
         <Button x:Name="btnShowAll" Content="Show All" HorizontalAlignment="Left" Margin="88,19,0,0" VerticalAlignment="Top" Width="75" Click="btnShowAll_Click"/>
+        <Label x:Name="lblTurn" Content="
+               " HorizontalAlignment="Left" Margin="198,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnHideAll" Content="Hide All" HorizontalAlignment="Left" Margin="88,41,0,0" VerticalAlignment="Top" Width="75" Click="btnHideAll_Click"/>
     </Grid>
 </Window>

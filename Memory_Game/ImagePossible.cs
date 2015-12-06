@@ -10,5 +10,6 @@ namespace Memory_Game
     {
         public string imageName { get; set; }
         public bool IsUsed { get; set; }
+        public bool IsRemoved { get; set; }
     }
 }

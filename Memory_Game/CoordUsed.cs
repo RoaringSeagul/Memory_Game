@@ -10,6 +10,7 @@ namespace Memory_Game
     {
         public bool IsUsed { get; set; }
         public bool IsRemoved { get; set; }
+        public bool IsSpecial { get; set; }
 
         public CoordUsed()
         {

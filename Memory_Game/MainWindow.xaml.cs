@@ -15,6 +15,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Threading;
+using System.Windows.Threading;
+using System.Security.Permissions;
 
 namespace Memory_Game
 {
@@ -23,22 +25,24 @@ namespace Memory_Game
     /// </summary>
     public partial class MainWindow : Window
     {
+        int scoreP1;
+        int scoreP2;
+        int firstCardX;
+        int firstCardY;
+
         byte TourdeJeu;
         byte size;
         logique.Theme theme;
         Carte[,] aCartes;
-        private int[] clicked1;
-        private int[] clicked2;
-        private bool bclicked1 = false;
-        private bool bclicked2 = false;
-
+        Random _rnd = new Random();
+        bool finished;
         public logique logique;
         public MainWindow()
         {
             InitializeComponent();
-            clicked1 = new int[2];
-            clicked2 = new int[2];
             size = 8;
+            scoreP1 = 0;
+            scoreP2 = 0;
             theme = logique.Theme.fruits;
             logique = new logique(size, theme);
             aCartes = new Carte[size, size];
@@ -53,70 +57,119 @@ namespace Memory_Game
                     Plateau.Children.Add(aCartes[x, y]);
                 }
             }
+            lblTurn.Content = ("Its player1's turn");
         }
 
         internal void update(int x, int y)
         {
-            TourdeJeu++;
-            if (!bclicked1)
+            if (!aCartes[x, y].clicked)
             {
-                clicked1[0] = x;
-                clicked1[1] = y;
-            }
+                aCartes[x, y].ShowBackground(this);
 
-            if (!bclicked2)
-            {
-                clicked2[0] = x;
-                clicked2[1] = y;
+                if (TourdeJeu == 0)
+                {
+                    firstCardX = x;
+                    firstCardY = y;
+                }
+
+                ++TourdeJeu;
             }
-            
-            if (logique.GetCurrentPlayer() == logique.GetLastPlayerPlayed())
+            else if (logique.GetIsRemoved(x, y))
             {
-                MessageBox.Show("Ce n'est pas votre tour");
-                logique.ChangeCurrentPlayer();
+                MessageBox.Show("Cette carte n'existe plus");
             }
             else
             {
-                if (!aCartes[x, y].clicked)
-                {
-                    aCartes[x, y].ShowBackground(this);
-                    if (logique.GetImage(x, y).imageName.Contains("parking") || logique.GetImage(x, y).imageName.Contains("melange"))
-                    {
-                        TurnAllCards();
-                        logique.ReshuffleCards();
-                    }
-                    else if (logique.GetImage(x, y).imageName.Contains("maudite1") || logique.GetImage(x, y).imageName.Contains("maudite2"))
-                    {
-                        TurnAllCards();
-                        logique.ReshuffleCardsCursed(x, y, logique.GetImage(x, y).imageName);
-                    }
-                    else if (logique.GetImage(x, y).imageName.Contains("joker"))
-                    {
-                        TurnAllCards();
-                        aCartes[x, y].SetBackground(Brushes.Red);
-                        logique.rmJoker(x, y);
-                    }
-                }
-                else
-                {
-                    aCartes[x, y].SetBackground(Brushes.Aqua);
-                    aCartes[x, y].clicked = false;
-                }
+                MessageBox.Show("Carte deja choisie");
             }
-
-            aCartes[clicked1[0], clicked1[1]].ShowBackground(this);
-            aCartes[clicked2[0], clicked2[1]].ShowBackground(this);
 
             if (TourdeJeu >= 2)
             {
                 TourdeJeu = 0;
                 logique.ChangeCurrentPlayer();
 
-                var stopWatch = Stopwatch.StartNew();
-                stopWatch.Start();
-                stopWatch.Stop();
+                var result = MessageBox.Show("Are you ready?", "Ready", MessageBoxButton.YesNo);
 
-                TurnAllCards();
+                if (result == MessageBoxResult.Yes)
+                {
+                    if (logique.GetImage(x, y).imageName.Contains("parking") || logique.GetImage(x, y).imageName.Contains("melange") ||
+                        logique.GetImage(firstCardX, firstCardY).imageName.Contains("parking") || 
+                        logique.GetImage(firstCardX, firstCardY).imageName.Contains("melange"))
+                    {
+                        logique.ReshuffleCards();
+                    }
+                    else if (logique.GetImage(x, y).imageName.Contains("maudite1") || logique.GetImage(x, y).imageName.Contains("maudite2") ||
+                             logique.GetImage(firstCardX, firstCardY).imageName.Contains("maudite1") || 
+                             logique.GetImage(firstCardX, firstCardY).imageName.Contains("maudite2"))
+                    {
+                        logique.ReshuffleCardsCursed(x, y, logique.GetImage(x, y).imageName);
+                    }
+                    else if (logique.GetImage(x, y).imageName.Contains("joker") || logique.GetImage(firstCardX, firstCardY).imageName.Contains("joker"))
+                    {
+                        aCartes[x, y].SetBackground(Brushes.Red);
+                        logique.rmJoker(x, y);
+                    }
+                    else if (logique.GetImage(firstCardX, firstCardY).imageName == logique.GetImage(x, y).imageName)
+                    {
+                        if (logique.GetCurrentPlayer() == logique.Joueurs.joueur1)
+                            scoreP1++;
+                        else if (logique.GetCurrentPlayer() == logique.Joueurs.joueur2)
+                            scoreP2++;
+
+                        logique.rmCarte(firstCardX, firstCardY, x, y);
+                        aCartes[firstCardX, firstCardY].SetBackground(Brushes.Red);
+                        aCartes[x, y].SetBackground(Brushes.Red);
+                    }
+
+                    TurnAllCards();
+                }
+
+                if (logique.GetCurrentPlayer() == logique.Joueurs.joueur1)
+                {
+                    lblTurn.Content = "Its player1's turn";
+                }
+                else if (logique.GetCurrentPlayer() == logique.Joueurs.joueur2)
+                {
+                    lblTurn.Content = "Its player2's turn";
+
+                    int rndX;
+                    int rndY;
+                    finished = false;
+
+                    do
+                    {
+                        rndX = _rnd.Next(0, size);
+                        rndY = _rnd.Next(0, size);
+
+                        if (!aCartes[rndX, rndY].clicked)
+                        {
+                            aCartes[rndX, rndY].PerformClick();
+                            finished = true;
+                        }
+
+                    } while (!finished);
+
+                    finished = false;
+
+                    do
+                    {
+                        rndX = _rnd.Next(0, size);
+                        rndY = _rnd.Next(0, size);
+
+                        if (!aCartes[rndX, rndY].clicked)
+                        {
+                            aCartes[rndX, rndY].PerformClick();
+                            finished = true;
+                        }
+
+                    } while (!finished);
+                }
+            }
+            UpdateScore();
+
+            if (logique.CheckIfFinished())
+            {
+                MessageBox.Show("C'est termine!");
             }
         }
 
@@ -126,12 +179,19 @@ namespace Memory_Game
             {
                 for (int y = 0; y < size; y++)
                 {
-                    if (!logique.GetIsUsed(x, y))
+                    if (!logique.GetIsRemoved(x, y))
                     {
                         aCartes[x, y].SetBackground(Brushes.Aqua);
+                        aCartes[x, y].clicked = false;
                     }
                 }
             }
+        }
+
+        void UpdateScore()
+        {
+            txtPlayer1.Text = scoreP1.ToString();
+            txtPlayer2.Text = scoreP2.ToString();
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -152,9 +212,25 @@ namespace Memory_Game
             {
                 for (int y = 0; y < size; y++)
                 {
-                    if (!logique.GetIsUsed(x, y))
+                    if (!logique.GetIsRemoved(x, y))
                     {
                         aCartes[x, y].ShowBackground(this);
+                        aCartes[x, y].clicked = false;
+                    }
+                }
+            }
+        }
+
+        private void btnHideAll_Click(object sender, RoutedEventArgs e)
+        {
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    if (!logique.GetIsRemoved(x, y))
+                    {
+                        aCartes[x, y].SetBackground(Brushes.Aqua);
+                        aCartes[x, y].clicked = false;
                     }
                 }
             }

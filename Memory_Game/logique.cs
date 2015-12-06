@@ -57,7 +57,10 @@ namespace Memory_Game
             }
 
             for (int i = 0; i < imagesPossibles.Count(); i++)
+            {
+                imagesPossibles[i].IsRemoved = false;
                 imagesPossibles[i].IsUsed = false;
+            }
 
             lstCoordUsed = new CoordUsed[size, size];
             lstImage = new ImageCarte[size, size];
@@ -149,6 +152,37 @@ namespace Memory_Game
             }
         }
 
+        internal bool CheckIfFinished()
+        {
+            for (int x = 0; x < size; x++)
+            {
+                for (int y = 0; y < size; y++)
+                {
+                    if (!lstCoordUsed[x, y].IsSpecial && !lstCoordUsed[x, y].IsRemoved && !lstImage[x, y].imageName.Contains("maypop") &&
+                        !lstImage[x, y].imageName.Contains("sapote") && !lstImage[x, y].imageName.Contains("saratoga") && 
+                        !lstImage[x, y].imageName.Contains("lfa") && !lstImage[x, y].imageName.Contains("melange") &&
+                        !lstImage[x, y].imageName.Contains("parking"))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        internal void rmCarte(int firstCardX, int firstCardY, int x, int y)
+        {
+            for (int i = 0; i < imagesPossibles.Count(); i++)
+            {
+                if (imagesPossibles[i].imageName == lstImage[firstCardX, firstCardY].imageName || imagesPossibles[i].imageName == lstImage[x, y].imageName)
+                {
+                    imagesPossibles[i].IsRemoved = true;
+                }
+            }
+            lstCoordUsed[firstCardX, firstCardY].IsRemoved = true;
+            lstCoordUsed[x, y].IsRemoved = true;
+        }
+
         internal void rmJoker(int x, int y)
         {
             JokerRemoved = true;
@@ -218,7 +252,7 @@ namespace Memory_Game
             return currentPlayer;
         }
 
-        internal bool GetIsUsed(int x, int y)
+        internal bool GetIsRemoved(int x, int y)
         {
             return lstCoordUsed[x, y].IsRemoved;
         }
@@ -246,45 +280,46 @@ namespace Memory_Game
 
         private void ChargerCarteNormale(int size)
         {
-            int rnd;
-            for (int x = 0; x < size; x++)
+            Done = false;
+
+            for (int i = 0; i < imagesPossibles.Count(); i++)
             {
-                for (int y = 0; y < size; y++)
+                if (!imagesPossibles[i].IsUsed && !imagesPossibles[i].IsRemoved)
                 {
-                    if (!lstCoordUsed[x, y].IsUsed)
+                    do
                     {
-                        Done = false;
-                        do
+                        int rndX = _rnd.Next(0, size);
+                        int rndY = _rnd.Next(0, size);
+
+                        if (!lstCoordUsed[rndX, rndY].IsUsed && !lstCoordUsed[rndX, rndY].IsRemoved)
                         {
-                            rnd = _rnd.Next(0, imagesPossibles.Count());
-                            if (!imagesPossibles[rnd].IsUsed || lstCoordUsed[x, y].IsRemoved)
-                            {
-                                lstImage[x, y] = new ImageCarte();
-                                lstImage[x, y].imageName = imagesPossibles[rnd].imageName;
-                                lstCoordUsed[x, y].IsUsed = true;
-                                imagesPossibles[rnd].IsUsed = true;
-                                Done = true;
-                            }
-                        } while (!Done);
-                    }
+                            lstImage[rndX, rndY] = new ImageCarte();
+                            lstImage[rndX, rndY].imageName = imagesPossibles[i].imageName;
+                            lstCoordUsed[rndX, rndY].IsUsed = true;
+                            imagesPossibles[i].IsUsed = true;
+                            Done = true;
+                        }
+                    } while (!Done);
+                    Done = false;
                 }
             }
         }
 
         private void ChangerCarteSpecial(string carte, int size)
         {
-            int rndX;
-            int rndY;
             Done = false;
+
             do
             {
-                rndX = _rnd.Next(0, size);
-                rndY = _rnd.Next(0, size);
-                if (!lstCoordUsed[rndX, rndY].IsUsed || lstCoordUsed[rndX, rndY].IsRemoved)
+                int rndX = _rnd.Next(0, size);
+                int rndY = _rnd.Next(0, size);
+
+                if (!lstCoordUsed[rndX, rndY].IsUsed && !lstCoordUsed[rndX, rndY].IsRemoved)
                 {
                     lstImage[rndX, rndY] = new ImageCarte();
                     lstImage[rndX, rndY].imageName = Directory.GetCurrentDirectory() + @"\Image\" + carte + ".png";
                     lstCoordUsed[rndX, rndY].IsUsed = true;
+                    lstCoordUsed[rndX, rndY].IsSpecial = true;
                     Done = true;
                 }
             } while (!Done);

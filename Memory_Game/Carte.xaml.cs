@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Threading;
 
 namespace Memory_Game
 {
@@ -53,6 +54,11 @@ namespace Memory_Game
             var brush = new ImageBrush();
             brush.ImageSource = new BitmapImage(new Uri(main.logique.GetImage(positionX, positionY).imageName, UriKind.Relative));
             btn.Background = brush;
+        }
+
+        internal void PerformClick()
+        {
+            btn.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
         }
 
         internal void Disable()
