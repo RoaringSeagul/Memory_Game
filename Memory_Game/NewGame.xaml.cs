@@ -30,6 +30,7 @@ namespace Memory_Game
             {
                 cbxDebutePartieItemJoueur2.IsEnabled = false;
                 cbxDebutePartieItemOrdinateur.IsEnabled = true;
+                txtbNomJoueur2.IsEnabled = false;
             }
             else if (cbxNbrJoueurItem2.IsSelected)
             {
@@ -37,10 +38,24 @@ namespace Memory_Game
                     cbxDebutePartieItemJoueur2 = new ComboBoxItem();
                 if (cbxDebutePartieItemOrdinateur == null)
                     cbxDebutePartieItemOrdinateur = new ComboBoxItem();
+                if (txtbNomJoueur2 == null)
+                    txtbNomJoueur2 = new TextBox();
+
+                txtbNomJoueur2.IsEnabled = true;
 
                 cbxDebutePartieItemJoueur2.IsEnabled = true;
                 cbxDebutePartieItemOrdinateur.IsEnabled = false;
             }
+        }
+
+        private void txtbNomJoueur1_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            cbxDebutePartieItemJoueur1.Content = txtbNomJoueur1.Text;
+        }
+
+        private void txtbNomJoueur2_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            cbxDebutePartieItemJoueur2.Content = txtbNomJoueur2.Text;
         }
     }
 }
