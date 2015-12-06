@@ -13,21 +13,21 @@ namespace Memory_Game
         public enum Joueurs { joueur1, joueur2, CPU }
         public enum Theme { voitures, fruits }
 
-        Theme theme;
         int size;
-        Joueurs lastPlayedPlayer = Joueurs.joueur2;
-        Joueurs currentPlayer = Joueurs.joueur1;
-
         bool cursed1;
         bool cursed2;
         bool JokerRemoved;
         bool bNewGame;
+        bool Done = false;
+
+        Theme theme;
+        Joueurs lastPlayedPlayer = Joueurs.joueur2;
+        Joueurs currentPlayer = Joueurs.joueur1;
 
         Random _rnd = new Random();
         ImagePossible[] imagesPossibles;
         ImageCarte[,] lstImage;
         CoordUsed[,] lstCoordUsed;
-        bool Done = false;
 
         public logique(int PlateauSize, Theme ChoixTheme)
         {
@@ -39,41 +39,51 @@ namespace Memory_Game
             theme = ChoixTheme;
             size = PlateauSize;
 
-            string path = Directory.GetCurrentDirectory() + @"\Image\fruits\";
-            var images = Directory.GetFiles(path, "*.png");
-            imagesPossibles = new ImagePossible[(images.Count())*2];
-            int counter1 = 0;
-            int counter2 = 0;
-
-            foreach (var item in images)
-            {
-                imagesPossibles[counter2] = new ImagePossible();
-                imagesPossibles[counter2].imageName = images[counter1];
-                ++counter2;
-                imagesPossibles[counter2] = new ImagePossible();
-                imagesPossibles[counter2].imageName = images[counter1];
-                ++counter2;
-                ++counter1;
-            }
-
-            for (int i = 0; i < imagesPossibles.Count(); i++)
-            {
-                imagesPossibles[i].IsRemoved = false;
-                imagesPossibles[i].IsUsed = false;
-            }
-
             lstCoordUsed = new CoordUsed[size, size];
             lstImage = new ImageCarte[size, size];
 
-            for (int x = 0; x < size; x++)
-                for (int y = 0; y < size; y++)
-                    lstCoordUsed[x, y] = new CoordUsed();
+            
 
             NewGame(size, theme);
         }
 
         private void NewGame(int size, Theme theme)
         {
+            if (bNewGame)
+            {
+                string path = Directory.GetCurrentDirectory() + @"\Image\fruits\";
+                var images = Directory.GetFiles(path, "*.png");
+                imagesPossibles = new ImagePossible[(images.Count()) * 2];
+                int counter1 = 0;
+                int counter2 = 0;
+
+                foreach (var item in images)
+                {
+                    imagesPossibles[counter2] = new ImagePossible();
+                    imagesPossibles[counter2].imageName = images[counter1];
+                    ++counter2;
+                    imagesPossibles[counter2] = new ImagePossible();
+                    imagesPossibles[counter2].imageName = images[counter1];
+                    ++counter2;
+                    ++counter1;
+                }
+
+                for (int i = 0; i < imagesPossibles.Count(); i++)
+                {
+                    imagesPossibles[i].IsRemoved = false;
+                    imagesPossibles[i].IsUsed = false;
+                }
+
+                for (int x = 0; x < size; x++)
+                    for (int y = 0; y < size; y++)
+                        lstCoordUsed[x, y] = new CoordUsed();
+
+                for (int Ux = 0; Ux < size; Ux++)
+                    for (int Uy = 0; Uy < size; Uy++)
+                        lstCoordUsed[Ux, Uy].IsRemoved = false;
+                bNewGame = false;
+            }
+
             if (theme == Theme.voitures)
             {
                 for (int i = 0; i < 6; i++)
@@ -141,14 +151,6 @@ namespace Memory_Game
                     }
                 }
                 ChargerCarteNormale(size);
-
-                if (bNewGame)
-                {
-                    for (int Ux = 0; Ux < size; Ux++)
-                        for (int Uy = 0; Uy < size; Uy++)
-                            lstCoordUsed[Ux, Uy].IsRemoved = false;
-                    bNewGame = false;
-                }
             }
         }
 
@@ -210,6 +212,12 @@ namespace Memory_Game
             NewGame(size, theme);
         }
 
+        internal void StartNewGame()
+        {
+            bNewGame = true;
+            NewGame(size, Theme.fruits);
+        }
+
         internal void ReshuffleCardsCursed(int Ux, int Uy, string maudite)
         {
             if (maudite.Contains("maudite1"))
@@ -221,7 +229,7 @@ namespace Memory_Game
             {
                 for (int y = 0; y < size; y++)
                 {
-                    if (GetImage(x, y).imageName != maudite || lstCoordUsed[x, y].IsRemoved)
+                    if (GetImage(x, y).imageName != maudite && !lstCoordUsed[x, y].IsRemoved)
                     {
                         lstCoordUsed[x, y].IsUsed = false;
                     }
@@ -230,7 +238,7 @@ namespace Memory_Game
 
             for (int i = 0; i < imagesPossibles.Count(); i++)
             {
-                if (imagesPossibles[i].imageName != maudite || lstCoordUsed[Ux, Uy].IsRemoved)
+                if (imagesPossibles[i].imageName != maudite && !lstCoordUsed[Ux, Uy].IsRemoved)
                 {
                     imagesPossibles[i].IsUsed = false;
                 }

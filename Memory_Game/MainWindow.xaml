@@ -11,17 +11,23 @@
         <TextBox x:Name="txtPlayer2" HorizontalAlignment="Left" Height="20" Margin="408,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99"/>
         <Label x:Name="lblScore1" Content="Score Joueur 1" HorizontalAlignment="Left" Height="26" Margin="304,10,0,0" VerticalAlignment="Top" Width="99"/>
         <Label x:Name="lblScore2" Content="Score Joueur 2" HorizontalAlignment="Left" Height="26" Margin="408,10,0,0" VerticalAlignment="Top" Width="99" RenderTransformOrigin="0.021,0.54"/>
-        <Menu x:Name="menu" HorizontalAlignment="Left" Height="19" VerticalAlignment="Top" Width="35">
+        <Menu x:Name="menu" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="35">
             <MenuItem Header="_File" Width="35" RenderTransformOrigin="0.5,0.5" Margin="0">
-                <MenuItem Header="_test" />
+                <MenuItem Header="New Game" Click="MenuItemNewGame_Click" />
                 <Separator />
-                <MenuItem Header="_test" />
+                <MenuItem Header="Restart Game" Click="MenuItemRestart_Click" />
+            </MenuItem>
+        </Menu>
+        <Menu x:Name="menuDebug" HorizontalAlignment="Left" Height="20" VerticalAlignment="Top" Width="50" Margin="36, 0, 0, 0">
+            <MenuItem Header="_Debug" Width="50" RenderTransformOrigin="0.5,0.5" Margin="0">
+                <MenuItem Header="Show All" Click="MenuItemShowAll_Click" />
+                <Separator />
+                <MenuItem Header="Hide All" Click="MenuItemHideAll_Click" />
             </MenuItem>
         </Menu>
         <UniformGrid x:Name="Plateau" Rows="8" Columns="8" Height="500px" Width="500px" VerticalAlignment="Bottom" HorizontalAlignment="Center"/>
-        <Button x:Name="btnShowAll" Content="Show All" HorizontalAlignment="Left" Margin="88,19,0,0" VerticalAlignment="Top" Width="75" Click="btnShowAll_Click"/>
         <Label x:Name="lblTurn" Content="
-               " HorizontalAlignment="Left" Margin="198,10,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="btnHideAll" Content="Hide All" HorizontalAlignment="Left" Margin="88,41,0,0" VerticalAlignment="Top" Width="75" Click="btnHideAll_Click"/>
+               " HorizontalAlignment="Left" Margin="110,10,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="btnCPU" Content="Generate" HorizontalAlignment="Left" Margin="0,25,0,0" VerticalAlignment="Top" Width="86" Click="btnCPU_Click"/>
     </Grid>
 </Window>
