@@ -42,30 +42,32 @@ namespace Memory_Game
             lstCoordUsed = new CoordUsed[size, size];
             lstImage = new ImageCarte[size, size];
 
-            
-
-            NewGame(size, theme);
+            NewGame(PlateauSize, theme);
         }
 
         private void NewGame(int size, Theme theme)
         {
             if (bNewGame)
             {
-                string path = Directory.GetCurrentDirectory() + @"\Image\fruits\";
+                var path = Directory.GetCurrentDirectory() + @"\Image\fruits\";
                 var images = Directory.GetFiles(path, "*.png");
-                imagesPossibles = new ImagePossible[(images.Count()) * 2];
+
+                imagesPossibles = new ImagePossible[images.Count() * 2];
                 int counter1 = 0;
                 int counter2 = 0;
 
                 foreach (var item in images)
                 {
-                    imagesPossibles[counter2] = new ImagePossible();
-                    imagesPossibles[counter2].imageName = images[counter1];
-                    ++counter2;
-                    imagesPossibles[counter2] = new ImagePossible();
-                    imagesPossibles[counter2].imageName = images[counter1];
-                    ++counter2;
-                    ++counter1;
+                    if (counter2 < (size * size))
+                    {
+                        imagesPossibles[counter2] = new ImagePossible();
+                        imagesPossibles[counter2].imageName = images[counter1];
+                        ++counter2;
+                        imagesPossibles[counter2] = new ImagePossible();
+                        imagesPossibles[counter2].imageName = images[counter1];
+                        ++counter2;
+                        ++counter1;
+                    }
                 }
 
                 for (int i = 0; i < imagesPossibles.Count(); i++)
